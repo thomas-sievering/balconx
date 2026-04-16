@@ -9,7 +9,7 @@ Tiny terminal weather app for one question: **when is it nice enough to work on 
 
 It opens as a small interactive terminal app.
 
-![balconx screenshot](assets/balconx.svg)
+![balconx screenshot](assets/balconx-real.png)
 
 ## Features
 
