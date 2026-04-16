@@ -1,0 +1,21 @@
+{
+  "name": "balconx",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "balconx": "dist/index.js"
+  },
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "build": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\" && tsc -p tsconfig.json",
+    "start": "bun run dist/index.js",
+    "test": "bun test",
+    "install:global": "bun run build && bun link"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "typescript": "^5.8.3"
+  },
+  "packageManager": "bun@1"
+}
