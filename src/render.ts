@@ -108,7 +108,7 @@ export function renderScreen(options: {
       console.log(`range ${config.minTemp}–${config.maxTemp}°C  rain ≤ ${config.maxPrecipitation}  hours ${formatHour(config.startHour)}–${formatHour(config.endHour)}`);
       console.log('');
     }
-    console.log(bold(`${title} ${dim('·')} ${formatDisplayDate(summary.date)}`));
+    console.log(bold(`${formatDisplayDate(summary.date)} ${dim('·')} ${title}`));
     console.log('');
     for (const line of renderWideTimeline(summary, { currentHour: current.hour, markCurrent: dayIndex === 0 })) console.log(line);
     console.log('');

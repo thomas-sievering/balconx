@@ -21,6 +21,7 @@ import { fetchForecast } from './weather.js';
 
 const HELP_FLAGS = new Set(['-h', '--help']);
 const VERSION_FLAGS = new Set(['-v', '--version']);
+const TITLE = '☁ balconx';
 
 type JsonMode = 'now' | 'today' | 'tomorrow' | 'next';
 
@@ -31,6 +32,11 @@ function getVersion(): string {
   } catch {
     return '0.0.0';
   }
+}
+
+function setTerminalTitle(title: string): void {
+  if (!output.isTTY) return;
+  output.write(`\x1b]0;${title}\x07`);
 }
 
 function printHelp(): void {
@@ -120,6 +126,7 @@ async function runJsonMode(mode: JsonMode): Promise<void> {
 }
 
 async function runApp(): Promise<void> {
+  setTerminalTitle(TITLE);
   let config = await ensureConfigInteractive(await readConfig());
   let screen: Screen = 'day';
   let dayIndex = 0;
@@ -198,6 +205,7 @@ async function runApp(): Promise<void> {
   }
 
   function cleanup(): void {
+    setTerminalTitle('');
     input.off('data', onData);
     setRawMode(Boolean(oldRaw));
     input.pause();
@@ -239,6 +247,7 @@ async function main(): Promise<void> {
 }
 
 main().catch((error) => {
+  setTerminalTitle('');
   console.error(`${APP_NAME}: ${error instanceof Error ? error.message : String(error)}`);
   exit(1);
 });
